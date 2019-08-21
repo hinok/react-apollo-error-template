@@ -1,10 +1,4 @@
-import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLID,
-  GraphQLString,
-  GraphQLList,
-} from 'graphql';
+import { GraphQLSchema, GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } from 'graphql';
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
@@ -26,6 +20,20 @@ const QueryType = new GraphQLObjectType({
     people: {
       type: new GraphQLList(PersonType),
       resolve: () => peopleData,
+    },
+    person: {
+      type: PersonType,
+      args: {
+        id: { type: GraphQLString },
+      },
+      resolve: function(_, { id }) {
+        const result = peopleData.find(person => String(person.id) === String(id));
+        if (!result) {
+          throw new Error('Not found');
+        }
+
+        return result;
+      },
     },
   },
 });

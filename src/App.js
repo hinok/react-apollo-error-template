@@ -1,38 +1,29 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-
-const ALL_PEOPLE = gql`
-  query AllPeople {
-    people {
-      id
-      name
-    }
-  }
-`;
+import React, { useState } from 'react';
+import { setAuth } from './auth';
+// import People from './People';
+import Person from './Person';
 
 export default function App() {
-  const {
-    loading,
-    data: { people }
-  } = useQuery(ALL_PEOPLE);
+  const [personId, setPerson] = useState('1');
+  const [rendered, setRendered] = useState(1);
 
   return (
     <main>
       <h1>Apollo Client Issue Reproduction</h1>
+      <p>This application can be used to demonstrate an error in Apollo Client.</p>
+      <hr />
+      <button onClick={() => setAuth(true)}>Set auth: true</button>
+      <button onClick={() => setAuth(false)}>Set auth: false</button>
+      <button onClick={() => setPerson('1')}>Load person id: 1</button>
+      <button onClick={() => setPerson('2')}>Load person id: 2</button>
+      <button onClick={() => setPerson('4')}>Load person id: 4</button>
       <p>
-        This application can be used to demonstrate an error in Apollo Client.
+        Rendered times: {rendered}{' '}
+        <button onClick={() => setRendered(rendered + 1)}>Re-render</button>
       </p>
-      <h2>Names</h2>
-      {loading ? (
-        <p>Loading…</p>
-      ) : (
-        <ul>
-          {people.map(person => (
-            <li key={person.id}>{person.name}</li>
-          ))}
-        </ul>
-      )}
+      <hr />
+      {/* <People /> */}
+      <Person key={rendered} id={personId} />
     </main>
   );
 }

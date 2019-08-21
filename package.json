@@ -3,6 +3,9 @@
   "name": "apollo-client-error-template",
   "version": "1.0.0",
   "dependencies": {
+    "@apollo/react-common": "^3.0.0",
+    "@apollo/react-components": "^3.0.0",
+    "@apollo/react-hoc": "^3.0.0",
     "@apollo/react-hooks": "^3.0.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
