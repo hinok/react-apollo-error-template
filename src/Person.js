@@ -11,18 +11,22 @@ const ONE_PERSON = gql`
   }
 `;
 
-const Person = ({ data }) => console.log({
+const Person = ({ data }) => {
+  console.log('<Person />', {
     error: data.error,
     loading: data.loading,
     data,
-}) || (
-  <>
-    <h2>Person</h2>
-    {data.error && <p>Got error</p>}
-    {data.loading && <p>Loading...</p>}
-    {!data.error && !data.loading && <pre>{JSON.stringify(data.person, undefined, 2)}</pre>}
-  </>
-);
+  });
+
+  return (
+    <>
+      <h2>Person</h2>
+      {data.error && <p>Got error</p>}
+      {data.loading && <p>Loading...</p>}
+      {!data.error && !data.loading && <pre>{JSON.stringify(data.person, undefined, 2)}</pre>}
+    </>
+  );
+};
 
 export default graphql(ONE_PERSON, {
   options: props => ({

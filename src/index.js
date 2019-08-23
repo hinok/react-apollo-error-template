@@ -3,10 +3,8 @@ import { render } from 'react-dom';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
-
 import { link } from './graphql/link';
 import App from './App';
-
 import './index.css';
 
 const client = new ApolloClient({
@@ -25,7 +23,7 @@ const client = new ApolloClient({
       }
     },
   }).restore({
-    "Person:1":{"id":"1","__typename":"Person"},
+    "Person:4":{"id":"4","__typename":"Person"},
   }),
   link,
 });
